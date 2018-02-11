@@ -1,0 +1,188 @@
+grammar fr.n7.TowDefLang with org.eclipse.xtext.common.Terminals
+
+generate towDefLang "http://www.n7.fr/TowDefLang"
+
+
+
+Jeu:
+	'jeu' name=ID '{'
+		'elementsCommuns' '{'
+			elementsCommuns+=(ElementCommun)*	
+		'}'
+		'parties' '{'
+			parties+=Partie*
+		'}'
+	'}'
+;
+
+
+ElementCommun:
+	Modele | NatureTerrain | Terrain
+;
+
+Lanceur:
+     Mobile | Obstacle
+;
+
+Modele:
+    ModeleProjectile | ModeleLanceur
+;
+
+ModeleLanceur:
+	ModeleMobile | ModeleObstacle
+;
+
+Partie:
+    'partie' name=ID '{'
+		'terrain' terrain=[Terrain] 
+        'vagues' '{'
+		vagues+=VagueMobiles*
+		'}'
+        'niveaux' '{'
+            niveaux+=Niveau*
+        '}'
+    '}'
+;
+
+Terrain:
+    'terrain' name=ID '{'
+        'nbLignes' nbLignes=INT
+        'nbColonnes' nbColonnes=INT
+        'cases' '{'
+            cases+=Case*
+        '}'
+    '}'
+; 
+
+NatureTerrain:
+    Passage | Campement | Decoration
+;
+Entree:
+    'entree' name=ID
+;
+
+Sortie:
+    'sortie' name=ID
+;
+
+Passage:
+    Entree | Sortie | Chemin
+;
+
+Chemin:
+    'chemin' name=ID '{'
+        'energieNecessaireMobile' energieNecessaireMobile=INT
+        'volumeMaxMobile' volumeMaxMobile=INT
+    '}'
+;
+
+Campement:
+    'campement' name=ID
+;
+
+Decoration:
+    'decoration' name=ID
+;
+
+Case:
+    'case' name=ID  '{'
+    	'x' x=INT
+    	'y' y=INT
+        'natureTerrain' natureTerrain=[NatureTerrain]
+    '}'
+;
+
+Niveau:
+    'niveau' name=ID '{'
+        'dureePauseVagueMobile' dureePauseVagueMobile=INT
+        'energieJoueur' energieJoueur=INT
+        'nbLimiteMobiles' nbLimiteMobiles=INT 
+    '}'
+;
+
+VagueMobiles:
+    'vague' name=ID '{'
+        'energieAttribueeJoueur' energieAttribueeJoueur=INT
+        'mobiles' '{'
+            mobiles+=Mobile*
+        '}'
+        
+        'obstacles' '{'
+            obstacles+=Obstacle*
+        '}'
+     '}'
+;
+
+
+FQN:
+	(ID".")* case=ID
+;
+Mobile:
+    'mobile' name=ID modele=[ModeleMobile]'{'
+
+        'ordreVague' ordreVague=INT
+        'caseEntreeVague'  caseEntreeVague=[Case|FQN]      
+ 
+        'caseSortieVague'  caseSortieVague=[Case|FQN]
+		'projectilesLancees' '{'
+			projectilesLancees+=Projectile*	
+		'}'	
+		'position' position=[Case|FQN]                
+		'energie' energie=INT
+    '}'
+;
+
+ModeleMobile:
+    'modele' 'mobile' name=ID '{'
+		'volume' volume=INT
+    	'energieMax' energieMax=INT
+    	'tactique' tactique=Tactique
+    	'modelesProjectile' '{'
+			modelesProjectile+=[ModeleProjectile]*
+		'}'
+	'vitese' vitesse=INT
+    '}'
+;
+
+Obstacle:
+    'obstacle' name=ID  modele=[ModeleObstacle]'{'
+    	'projectilesLancees' '{'
+			projectilesLancees+=Projectile*	
+		'}'	
+		'position' position=[Case|FQN]                
+		'energie' energie=INT
+    '}'
+;
+
+ModeleObstacle:
+    'modele' 'obstacle' name=ID '{'
+		'energieMax' energieMax=INT
+    	'tactique' tactique=Tactique
+    	'modelesProjectile' '{'
+			modelesProjectile+=[ModeleProjectile]*
+		'}'
+	'cout' cout=INT
+    '}'
+;
+
+enum Tactique:
+    ViserProche = 'ViserProche' |
+    ViserFaible = 'ViserFaible' |
+    ViserFort   = 'ViserFort'
+;
+
+Projectile:
+    'projectile' name=ID modele=[ModeleProjectile] '{'
+		'position' position=[Case|FQN]
+		'cible' cible=[Lanceur]
+    '}'
+;
+
+ModeleProjectile:
+    'modele' 'projectile' name=ID '{'
+        'portee' portee=INT
+        'masse' masse=INT
+        'vitesse' vitesse=INT
+        'qteEnergie' qteEnergie=INT
+    '}'
+;

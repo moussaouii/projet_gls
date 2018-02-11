@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="n7" version="12.0.0.2017041100">
+  <ownedViewpoints name="jeuView" modelFileExtension="td">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="jeuDiagram" domainClass="towDefLang::Jeu" enablePopupBars="true">
+      <metamodel href="http://www.n7.fr/TowDefLang#/"/>
+      <defaultLayer name="Default">
+        <nodeMappings name="entreeNode" domainClass="towDefLang::Entree">
+          <style xsi:type="style:EllipseNodeDescription" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="sortieNode" domainClass="towDefLang::Sortie">
+          <style xsi:type="style:EllipseNodeDescription" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='green']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="cheminNode" domainClass="towDefLang::Chemin">
+          <style xsi:type="style:EllipseNodeDescription" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="decorationNode" domainClass="towDefLang::Decoration">
+          <style xsi:type="style:EllipseNodeDescription" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='purple']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="campementNode" domainClass="towDefLang::Campement">
+          <style xsi:type="style:EllipseNodeDescription" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="modeleObstacleNode" domainClass="towDefLang::ModeleObstacle">
+          <style xsi:type="style:EllipseNodeDescription" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="modeleMobileNode" domainClass="towDefLang::ModeleMobile">
+          <style xsi:type="style:EllipseNodeDescription" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_yellow']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="modeleProjectileNode" domainClass="towDefLang::ModeleProjectile">
+          <style xsi:type="style:EllipseNodeDescription" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_purple']"/>
+          </style>
+        </nodeMappings>
+        <edgeMappings name="caseNatureRelation" sourceMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='terrainContainer']/@subNodeMappings[name='caseNode']" targetMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='campementNode'] //@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='cheminNode'] //@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='decorationNode'] //@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='entreeNode'] //@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='sortieNode']" targetFinderExpression="feature:natureTerrain">
+          <style lineStyle="dash" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="RelationMMobileMProjectile" sourceMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='modeleMobileNode']" targetMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='modeleProjectileNode']" targetFinderExpression="feature:modelesProjectile">
+          <style lineStyle="dash" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="RelationMObstacleProjectile" sourceMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='modeleObstacleNode']" targetMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='modeleProjectileNode']" targetFinderExpression="feature:modelesProjectile">
+          <style lineStyle="dash" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="mobileEntreeRelation" sourceMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='partieContainer']/@subContainerMappings[name='vagueContainer']/@subContainerMappings[name='mobileContainer']" targetMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='terrainContainer']/@subNodeMappings[name='caseNode']" targetFinderExpression="feature:caseEntreeVague">
+          <style lineStyle="dot" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="mobileSortieRelation" sourceMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='partieContainer']/@subContainerMappings[name='vagueContainer']/@subContainerMappings[name='mobileContainer']" targetMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='terrainContainer']/@subNodeMappings[name='caseNode']" targetFinderExpression="feature:caseSortieVague">
+          <style lineStyle="dot" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="mobilepositionRelation" sourceMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='partieContainer']/@subContainerMappings[name='vagueContainer']/@subContainerMappings[name='mobileContainer']" targetMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='terrainContainer']/@subNodeMappings[name='caseNode']" targetFinderExpression="feature:position">
+          <style lineStyle="dot" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="obstaclepositionRelation" sourceMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='partieContainer']/@subContainerMappings[name='vagueContainer']/@subContainerMappings[name='obstacleContainer']" targetMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='terrainContainer']/@subNodeMappings[name='caseNode']" targetFinderExpression="feature:position">
+          <style lineStyle="dot" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="mobileModeleRelation" sourceMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='partieContainer']/@subContainerMappings[name='vagueContainer']/@subContainerMappings[name='mobileContainer']" targetMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='modeleMobileNode']" targetFinderExpression="feature:modele">
+          <style lineStyle="dot" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="obstacleModeleRelation" sourceMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='partieContainer']/@subContainerMappings[name='vagueContainer']/@subContainerMappings[name='obstacleContainer']" targetMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='modeleObstacleNode']" targetFinderExpression="feature:modele">
+          <style lineStyle="dot" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="partieTerrainRelation" sourceMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='partieContainer']" targetMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='terrainContainer']" targetFinderExpression="feature:terrain">
+          <style lineStyle="dot" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="projectileModeleRelation" sourceMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='partieContainer']/@subContainerMappings[name='vagueContainer']/@subContainerMappings[name='mobileContainer']/@subNodeMappings[name='projectileNodeMobile'] //@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='partieContainer']/@subContainerMappings[name='vagueContainer']/@subContainerMappings[name='obstacleContainer']/@subNodeMappings[name='projectileNodeObstacle']" targetMapping="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='modeleProjectileNode']" targetFinderExpression="feature:modele">
+          <style lineStyle="dash" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='purple']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <containerMappings name="terrainContainer" domainClass="towDefLang::Terrain">
+          <subNodeMappings name="caseNode" semanticCandidatesExpression="feature:cases" domainClass="towDefLang::Case">
+            <style xsi:type="style:SquareDescription" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </subNodeMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelFormat>bold</labelFormat>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+          </style>
+        </containerMappings>
+        <containerMappings name="partieContainer" domainClass="towDefLang::Partie">
+          <subNodeMappings name="niveauNode" semanticCandidatesExpression="feature:niveaux" domainClass="towDefLang::Niveau">
+            <style xsi:type="style:SquareDescription" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            </style>
+          </subNodeMappings>
+          <subContainerMappings name="vagueContainer" domainClass="towDefLang::VagueMobiles">
+            <subContainerMappings name="mobileContainer" semanticCandidatesExpression="feature:mobiles" domainClass="towDefLang::Mobile">
+              <subNodeMappings name="projectileNodeMobile" semanticCandidatesExpression="feature:projectilesLancees" domainClass="towDefLang::Projectile">
+                <style xsi:type="style:LozengeNodeDescription" labelPosition="node" resizeKind="NSEW">
+                  <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                  <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                  <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+                </style>
+              </subNodeMappings>
+              <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+                <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+              </style>
+            </subContainerMappings>
+            <subContainerMappings name="obstacleContainer" semanticCandidatesExpression="feature:obstacles" domainClass="towDefLang::Obstacle">
+              <subNodeMappings name="projectileNodeObstacle" semanticCandidatesExpression="feature:projectilesLancees" domainClass="towDefLang::Projectile">
+                <style xsi:type="style:LozengeNodeDescription" labelPosition="node" resizeKind="NSEW">
+                  <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                  <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                  <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+                </style>
+              </subNodeMappings>
+              <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+                <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+              </style>
+            </subContainerMappings>
+            <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_purple']"/>
+            </style>
+          </subContainerMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelFormat>bold</labelFormat>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+          </style>
+        </containerMappings>
+        <toolSections name="creer modeles ">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="creer modele mobile" nodeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='modeleMobileNode']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="towDefLang::ModeleMobile" referenceName="elementsCommuns"/>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="creer modele obstacle" nodeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='modeleObstacleNode']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="towDefLang::ModeleObstacle" referenceName="elementsCommuns"/>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="creer modele projectile" nodeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='modeleProjectileNode']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="towDefLang::ModeleProjectile" referenceName="elementsCommuns"/>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="lier mobile projectile" edgeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@edgeMappings[name='RelationMMobileMProjectile']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:SetValue" featureName="modelesProjectile" valueExpression="[target/]"/>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="lier obstacle projectile" edgeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@edgeMappings[name='RelationMObstacleProjectile']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:SetValue" featureName="modelesProjectile" valueExpression="[target/]"/>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+        <toolSections name="creer terrain">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="creer terrain" containerMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='terrainContainer']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="towDefLang::Terrain" referenceName="elementsCommuns"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="creer case " nodeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='terrainContainer']/@subNodeMappings[name='caseNode']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="towDefLang::Case" referenceName="cases"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="creer entree" nodeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='entreeNode']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="towDefLang::Entree" referenceName="elementsCommuns"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="lier case nature terrain" edgeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@edgeMappings[name='caseNatureRelation']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="natureTerrain" valueExpression="[target/]"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="creer sortie" nodeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='sortieNode']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="towDefLang::Sortie" referenceName="elementsCommuns"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="creer chemin" nodeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='cheminNode']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="towDefLang::Chemin" referenceName="elementsCommuns"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="creer campement" nodeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='campementNode']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="towDefLang::Campement" referenceName="elementsCommuns"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="creer decoration" nodeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@nodeMappings[name='decorationNode']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="towDefLang::Decoration" referenceName="elementsCommuns"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+        <toolSections name="creer partie">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="creer partie" containerMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='partieContainer']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="towDefLang::Partie" referenceName="parties"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="creer niveau" nodeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='partieContainer']/@subNodeMappings[name='niveauNode']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="towDefLang::Niveau" referenceName="niveaux"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="creer vague" containerMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='partieContainer']/@subContainerMappings[name='vagueContainer']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="towDefLang::VagueMobiles" referenceName="vagues"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="lier partie terrain" edgeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@edgeMappings[name='partieTerrainRelation']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="terrain" valueExpression="[target/]"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+        <toolSections name="creer elements de vague">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="creer mobile" containerMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='partieContainer']/@subContainerMappings[name='vagueContainer']/@subContainerMappings[name='mobileContainer']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="towDefLang::Mobile" referenceName="mobiles"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="creer obstacle" containerMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='partieContainer']/@subContainerMappings[name='vagueContainer']/@subContainerMappings[name='mobileContainer']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="towDefLang::Obstacle" referenceName="obstacles"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="lier mobile entrer" edgeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@edgeMappings[name='mobileEntreeRelation']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="caseEntreeVague" valueExpression="[target/]"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="lier mobile sortie" edgeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@edgeMappings[name='mobileSortieRelation']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="caseSortieVague" valueExpression="[target/]"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="lier mobile position" edgeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@edgeMappings[name='mobilepositionRelation']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="position" valueExpression="[target/]"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="lier obstacle position" edgeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@edgeMappings[name='obstaclepositionRelation']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="position" valueExpression="[target/]"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="creer projectile Mobile" nodeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='partieContainer']/@subContainerMappings[name='vagueContainer']/@subContainerMappings[name='mobileContainer']/@subNodeMappings[name='projectileNodeMobile']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="towDefLang::Projectile" referenceName="projectilesLancees"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="creer projectile obstacle" nodeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@containerMappings[name='partieContainer']/@subContainerMappings[name='vagueContainer']/@subContainerMappings[name='obstacleContainer']/@subNodeMappings[name='projectileNodeObstacle']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="towDefLang::Projectile" referenceName="projectilesLancees"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="lier projectile modele" edgeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@edgeMappings[name='projectileModeleRelation']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="modele" valueExpression="[target/]"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="lier mobile modele" edgeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@edgeMappings[name='mobileModeleRelation']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="modele" valueExpression="[target/]"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="lier obstacle modele" edgeMappings="//@ownedViewpoints[name='jeuView']/@ownedRepresentations[name='jeuDiagram']/@defaultLayer/@edgeMappings[name='obstacleModeleRelation']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="modele" valueExpression="[target/]"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+      </defaultLayer>
+    </ownedRepresentations>
+    <ownedJavaExtensions qualifiedClassName="fr.n7.design.Services"/>
+  </ownedViewpoints>
+</description:Group>

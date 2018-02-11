@@ -1,0 +1,173 @@
+
+import ecore : 'TowDefLang.ecore'
+
+package towDefLang
+
+
+
+context Case
+	/*retourne le terrain de self */
+	def: terrain() : Terrain 
+		=Terrain.allInstances()->select(t | t.cases ->includes(self))
+		->asSequence() ->first()
+	
+	/*retourne tous les case de type chemins relie a self (self serait une case de type entree) */
+	def: cheminPossible(li:Set(Case)): Set(Case)
+			=self.terrain().cases->select(ch | ch.isChemin() and self.aCote(ch) and li->excludes(ch) )
+				->union(
+				self.terrain().cases->select(ch | ch.isChemin() and self.aCote(ch) and li->excludes(ch)  )
+				->collect(x:Case | x.cheminPossible(li->union(
+				self.terrain().cases->select(ch | ch.isChemin() and self.aCote(ch) and li->excludes(ch)  ))
+					
+				))->asSet()
+			)
+	
+	/*retourne Vrai si "c" et self si elles possèdent un côté commun*/
+	def: aCote(c: Case) : Boolean = (c.x=self.x  and (c.y=self.y+1 or c.y=self.y-1 )) 
+									or (c.y=self.y and (c.x=self.x+1 or c.x=self.x-1  ))
+									
+	def: aCoteDeSortie() :Boolean = self.terrain().cases->select(ch | ch.isSortie() and self.aCote(ch))->size()>0
+	
+	/*retourne Vrai si la case est de type chemin*/
+	def: isChemin() : Boolean = self.natureTerrain.oclIsKindOf(Chemin) 
+	/*retourne Vrai si la case est de type entree*/
+	def: isEntree() : Boolean = self.natureTerrain.oclIsKindOf(Entree)		
+	/*retourne Vrai si la case est de type sortie*/
+	def: isSortie() : Boolean = self.natureTerrain.oclIsKindOf(Sortie)	
+	/*retourne Vrai si la case est de type campement*/
+	def: isCampement() : Boolean = self.natureTerrain.oclIsKindOf(Campement)	
+	
+	
+	/*Coordonnée case valide si 0<x<=NL et  0<x<=NC*/
+	inv caseValide:
+		self.x<=self.terrain().nbLignes and self.y<=self.terrain().nbColonnes
+		and self.x>0 and self.y>0 
+
+
+
+
+context Terrain
+	/*Contrainte de base des attribus (positivité etc.) */
+	inv nbLignesEtNbColonnesPos:
+		self.nbColonnes>0 and self.nbLignes>0
+	/*contient au moins une case d’entrée, une case de sortie */
+	inv auMoinsUneCaseEntree: 
+		self.cases->select(c | c.isEntree())->size()>0
+	inv auMoinsUneCaseSortie: 
+		self.cases->select(c | c.isSortie())->size()>0
+		
+	/*toute case d’entrée est réliée à au moins une case de sortie par une séquence de cases de chemin */
+	inv entreeRelieeASortie :
+		self.cases->select(c | c.isEntree())
+		->forAll( e | e.cheminPossible(Set{})->exists(e | e.aCoteDeSortie()))
+		
+	/*nombre case valide */
+	inv nbCasesEqNbLFoisNbC:
+		self.cases->size()=self.nbLignes*self.nbColonnes
+
+	/*Coordonnée case unique */
+	inv caseUnique:
+		self.cases->forAll(c1,c2 | (c1.x=c2.x and c1.y=c2.y) implies c1=c2)
+
+
+context ModeleProjectile
+	/*Contrainte de base des attribus (positivité etc.) */
+	inv porteePos: self.portee>=0
+	inv masePos: self.masse>=0
+	inv vitessePos: self.vitesse>=0
+	inv qteEnergie: self.qteEnergie>=0
+
+   
+context ModeleObstacle
+	/*Contrainte de base des attribus (positivité etc.) */
+	inv energiePos: self.energieMax>=0
+	     
+			
+context ModeleMobile
+	/*Contrainte de base des attribus (positivité etc.) */
+	inv	volumePos: self.volume>=0
+	inv	energieMaxPos: self.energieMax>=0
+
+
+context Obstacle
+		/*retourne l'energie maximal que le projectile lancee par les obstacles peuvent l'absorber des mobiles
+	 *  pendant une tour */
+	def: somme():Integer
+	=self.projectilesLancees->iterate(p: Projectile; sum: Integer = 0 | sum + p.modele.qteEnergie)
+	
+	/*o: Obstacle; sum: Integer = 0 | sum + o.somme()
+	 * 
+	 Contrainte de base des attribus (positivité etc.) */
+	inv	volumePos: self.energie>=0
+	/*les obstacle  peuvent etre sur les case de type campement */
+	inv positionValide: self.position.isCampement()	
+
+
+	
+
+context Mobile
+	/*Contrainte de base des attribus (positivité etc.) */
+	inv ordreVaguePos: self.ordreVague>0
+	inv energiePos: self.energie>=0
+	/*les mobile peuvent aller sur entrée, sortie et chemin */
+	inv positionValide: self.position.isChemin() or self.position.isEntree() or self.position.isSortie()
+	/*le case entrée d'un mobile doit etre de type Entree */
+	inv entreeValide: self.caseEntreeVague.isEntree()
+	/*le case sortie d'un mobile doit etre de type Sortie */
+	inv sortieValide: self.caseSortieVague.isSortie()
+
+
+
+
+context Niveau 
+	/*Contrainte de base des attribus (positivité etc.)*/
+	inv dureePos: self.dureePauseVagueMobile>=0
+	inv energiePos: self.energieJoueur>=0
+	inv nbMobilesPos: self.nbLimiteMobiles>0
+
+
+
+
+context VagueMobiles
+	/*retourne l'energie maximal que les projectiles lancees par les obstacles peuvent l'absorber des mobiles
+	 *  pendant une tour */
+	def: sommeEnergieAbsorberParObstacles():Integer
+	=self.obstacles->iterate(o: Obstacle; sum: Integer = 0 | sum + o.somme())
+			
+	/*retourne la somme d'energie des mobiles de la vague*/
+	def: sommeEnergieMobiles():Integer
+	=self.mobiles->iterate(m: Mobile; sum: Integer = 0 | sum + m.modele.energieMax)
+	
+	
+	/*Contrainte de base des attribus (positivité etc.)*/
+	inv energieJoueurPos: self.energieAttribueeJoueur>=0
+	
+	/*les obstacles prépositionnés dans une vague ne suffisent pas à éliminer tous les mobiles de
+		cette vague */
+	inv obstaclesDeVagueNeSuffisentAEliminerMobiles:
+	self.sommeEnergieAbsorberParObstacles()<self.sommeEnergieMobiles()
+	
+	
+/*
+TODO l’énergie attribuée au joueur pour une vague est suffisante dans le meilleur des cas pour éviter
+une défaite
+TODO l’énergie attribuée au joueur pour une vague est insuffisante dans le pire des cas pour éviter
+une défaite
+ */
+
+
+context Jeu
+	/*contient au moins une partie */
+	inv auMoinsPartie: self.parties->size()>0
+
+
+
+context Partie
+	/*contient au moins une vague */
+	inv auMoinsVague: self.vagues->size()>0
+	/*contient au moins un niveau */
+	inv auMoinsNiveau: self.niveaux->size()>0
+
+
+
+endpackage

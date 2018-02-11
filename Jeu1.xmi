@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<towDefLang:Jeu
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:towDefLang="http://www.n7.fr/TowDefLang">
+  <elementsCommuns
+      xsi:type="towDefLang:Entree"
+      name="e"/>
+  <elementsCommuns
+      xsi:type="towDefLang:Sortie"
+      name="s"/>
+  <elementsCommuns
+      xsi:type="towDefLang:Chemin"
+      name="ch"/>
+  <elementsCommuns
+      xsi:type="towDefLang:Terrain"
+      name=" hh"
+      nbLignes="3"
+      nbColonnes="3">
+    <cases name="11"
+        x="1"
+        y="1"
+        natureTerrain="//@elementsCommuns.0"/>
+    <cases name="12"
+        x="1"
+        y="2"
+        natureTerrain="//@elementsCommuns.2"/>
+    <cases name="13"
+        x="1"
+        y="3"
+        natureTerrain="//@elementsCommuns.2"/>
+    <cases name="21"
+        x="2"
+        y="1"
+        natureTerrain="//@elementsCommuns.4"/>
+    <cases name="22"
+        x="2"
+        y="2"
+        natureTerrain="//@elementsCommuns.4"/>
+    <cases name="23"
+        x="2"
+        y="3"
+        natureTerrain="//@elementsCommuns.4"/>
+    <cases name="31"
+        x="3"
+        y="1"
+        natureTerrain="//@elementsCommuns.2"/>
+    <cases name="32"
+        x="3"
+        y="2"
+        natureTerrain="//@elementsCommuns.2"/>
+    <cases name="33"
+        x="3"
+        y="3"
+        natureTerrain="//@elementsCommuns.1"/>
+  </elementsCommuns>
+  <elementsCommuns
+      xsi:type="towDefLang:Decoration"
+      name="d"/>
+</towDefLang:Jeu>

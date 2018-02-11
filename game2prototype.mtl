@@ -1,0 +1,361 @@
+[comment encoding = UTF-8 /]
+[module toPrototype('http://www.n7.fr/TowDefLang')]
+
+
+[template public toPrototype(aJeu : Jeu)]
+[comment @main/]
+[file ('Jeu_'.concat(aJeu.name.concat('.java')), false, 'UTF-8')]
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ['Jeu_'.concat(aJeu.name)/] extends Jeu{
+    public ['Jeu_'.concat(aJeu.name)/]() {
+        String name = "[aJeu.name/]";
+        tourCourant = 0;
+        partieCourrante = -1;
+        ObstacleClassSelecteur modeleObstacles;
+
+        [aJeu.elementsCommuns->getNatureTerrain()->convertNatureTerrain()/]
+
+[for (p : ModeleProjectile | aJeu.elementsCommuns->getProjectiles())]
+[p.convertModeleProjectile()/]
+[/for]
+
+[for (m : ModeleMobile | aJeu.elementsCommuns->getMobiles())]
+[m.convertModeleMobile()/]
+[/for]
+
+[for (o : ModeleObstacle | aJeu.elementsCommuns->getObstacles())]
+[o.convertModeleObstacle()/]
+[/for]
+
+        modeleObstacles = new ObstacleClassSelecteur() {
+            @Override
+            public int getSize() {
+                return [aJeu.elementsCommuns->getObstacles()->size()/];
+            }
+            @Override
+            public String getInstanceName(int index) {
+                switch (index){
+[for (o : ModeleObstacle | aJeu.elementsCommuns->getObstacles())]
+                 case [aJeu.elementsCommuns->getObstacles()->indexOf(o)-1/]:
+                    return "[o.name/]";
+[/for]
+                 default:
+                     return null;
+                }
+            }
+
+            @Override
+            public Obstacle getInstance(int index, Case position) {
+                 switch (index){
+[for (o : ModeleObstacle | aJeu.elementsCommuns->getObstacles())]
+                    case [aJeu.elementsCommuns->getObstacles()->indexOf(o)-1/]:
+                         return new [o.name/](position);
+[/for]
+                    default:
+                        return null;
+                 }
+            }
+        };
+
+[for (t : Terrain | aJeu.elementsCommuns->getTerrains())]
+[t.convertTerrain()/]
+[/for]
+
+        parties = new ArrayList<>();
+
+[aJeu.parties->convertParties()/]
+
+
+
+    }
+}
+[/file]
+[comment lanceur/]
+[file (aJeu.name.concat('.java'), false, 'UTF-8')]
+public class [aJeu.name/] {
+	public static void main(String['[]'/] argv) {
+		boolean modeGraphique = argv.length==0 || !argv['[0]'/].equals("-c");
+		if (modeGraphique) {
+			Jeu [aJeu.name/] = new Jeu_[aJeu.name/]();
+			GUInterface gui = new GUInterface([aJeu.name/]);
+		}else{
+			Jeu [aJeu.name/] = new Jeu_[aJeu.name/]();
+			[aJeu.name/].runFullJeu(null);
+		}
+	}
+}
+[/file]
+[/template]
+
+[comment --------------NATURE TERRAIN----------/]
+
+[query public getNatureTerrain(eltCom : OrderedSet(ElementCommun)) : OrderedSet(NatureTerrain) =
+    eltCom->select(e | e.oclIsKindOf(NatureTerrain))
+          ->collect( nt | nt.oclAsType(NatureTerrain))
+          ->asOrderedSet()
+/]
+
+[template public convertNatureTerrain(natTer : OrderedSet(NatureTerrain))]
+[for (nt : NatureTerrain | natTer)]
+        final [nt.getNTClass()/] [nt.name/] =  new [nt.getNTClass()/] ("[nt.name/]", 'T', null, "[nt.name/].png"[if (nt.oclIsTypeOf(Chemin))][nt.oclAsType(Chemin).convertParamsChemin()/][/if]);
+[/for]
+[/template]
+
+[template public convertParamsChemin(aChemin : Chemin)], [aChemin.energieNecessaireMobile/], [aChemin.volumeMaxMobile/][/template]
+
+[template public getNTClass(nt : NatureTerrain)][if (nt.oclIsTypeOf(Entree))]Entree[else][if (nt.oclIsTypeOf(Sortie))]Sortie[else][if (nt.oclIsTypeOf(Chemin))]Chemin[else][if (nt.oclIsTypeOf(Campement))]Campement[else]Decoration[/if][/if][/if][/if][/template]
+
+
+[comment ---------------PROJECTILES---------------/]
+
+[query public getProjectiles(eltCom : OrderedSet(ElementCommun)) : OrderedSet(ModeleProjectile) =
+    eltCom->select(e | e.oclIsKindOf(ModeleProjectile))
+          ->collect( nt | nt.oclAsType(ModeleProjectile))
+          ->asOrderedSet()
+/]
+
+[template public loadReprGraphique(name : String)]
+        final ImageIcon['[]'/] repr_[name/] = {new ImageIcon("./ressources/[name/].png"), new ImageIcon("./ressources/[name/]_dead0.png"), new ImageIcon("./ressources/[name/]_dead1.png")};
+[/template]
+
+[template public convertModeleProjectile(modProj : ModeleProjectile)]
+[modProj.name.loadReprGraphique()/]
+        class [modProj.name/] extends Projectile{
+            public [modProj.name/] (Case c, Lanceur l){
+                super(c, l);
+            }
+
+            @Override
+            public int getPortee() {
+                return [modProj.portee/];
+            }
+
+            @Override
+            public int getMasse() {
+                return [modProj.masse/];
+            }
+
+            @Override
+            public int getQteEnergie() {
+                return [modProj.qteEnergie/];
+            }
+
+            @Override
+            public int getVitesse() {
+                return [modProj.vitesse/];
+            }
+
+            @Override
+            public Character getRepresentationConsole() {
+                return 'P';
+            }
+
+            @Override
+            public ImageIcon getRepresentationGraphique(int turn) {
+                if (getTourFin() == -1) {
+                    return repr_[modProj.name/]['['/]0[']'/];
+
+                }else{
+                    return repr_[modProj.name/]['['/](turn)%2 + 1[']'/];
+                }
+            }
+        };
+[/template]
+
+[comment ---------------MOBILES---------------/]
+
+[query public getMobiles(eltCom : OrderedSet(ElementCommun)) : OrderedSet(ModeleMobile) =
+    eltCom->select(e | e.oclIsKindOf(ModeleMobile))
+          ->collect( nt | nt.oclAsType(ModeleMobile))
+          ->asOrderedSet()
+/]
+
+[template public getSwitchCase(projectiles : OrderedSet(ModeleProjectile))]
+[for (p : ModeleProjectile | projectiles)]
+                case [projectiles->indexOf(p)-1/]:
+                    return new [p.name/](p, cible);
+[/for]
+[/template]
+
+[template public convertModeleMobile(modMob : ModeleMobile)]
+[modMob.name.loadReprGraphique()/]
+        class [modMob.name/] extends Mobile{
+
+            public [modMob.name/](Case caseEntreeVague, Case caseSortieVague, int ordreVague) {
+                super(caseEntreeVague, caseSortieVague, ordreVague);
+            }
+
+            @Override
+            public int getVolume() {
+                return [modMob.volume/];
+            }
+
+            @Override
+            public int getVitesse() {
+                return [modMob.vitesse/];
+            }
+
+            @Override
+            public Projectile getModeleProjectil(int index,Case p, Lanceur cible) {
+                switch (index) {
+[modMob.modelesProjectile->asOrderedSet()->getSwitchCase()/]
+                default:
+                throw new RuntimeException("pas de modele correspondant à cette index:"+index);
+                }
+            }
+
+            @Override
+            public int getNumProjectileModele() {
+                return [modMob.modelesProjectile->size()/];
+            }
+
+            @Override
+            public int getEnergieMax() {
+                return [modMob.energieMax/];
+            }
+
+            @Override
+            public Tactique getTactique() {
+                return Tactique.[modMob.tactique/];
+            }
+
+            @Override
+            public Character getRepresentationConsole() {
+                return 'M';
+            }
+
+            @Override
+            public ImageIcon getRepresentationGraphique(int turn) {
+                if (getTourMort() == -1) {
+                    return repr_[modMob.name/]['[0]'/];
+
+                }else{
+                    return repr_[modMob.name/]['['/](turn - getTourMort())%2 + 1[']'/];
+                }
+            }
+        }
+[/template]
+
+
+[comment ---------------OBSTACLES---------------/]
+
+[query public getObstacles(eltCom : OrderedSet(ElementCommun)) : OrderedSet(ModeleObstacle) =
+    eltCom->select(e | e.oclIsKindOf(ModeleObstacle))
+          ->collect( nt | nt.oclAsType(ModeleObstacle))
+          ->asOrderedSet()
+/]
+
+[template public convertModeleObstacle(modObs : ModeleObstacle)]
+[modObs.name.loadReprGraphique()/]
+        class [modObs.name/] extends Obstacle{
+            public [modObs.name/](Case caseCampement) {
+                super(caseCampement);
+            }
+
+            @Override
+            public int getCout() {
+                return [modObs.cout/];
+            }
+
+            @Override
+            public Projectile getModeleProjectil(int index, Case p, Lanceur cible) {
+                switch (index) {
+[modObs.modelesProjectile->asOrderedSet()->getSwitchCase()/]
+                default:
+                    throw new RuntimeException("pas de modele correspondant à cette index:"+index);
+                }
+            }
+
+            @Override
+            public int getNumProjectileModele() {
+                return [modObs.modelesProjectile->size()/];
+            }
+
+            @Override
+            public int getEnergieMax() {
+                return [modObs.energieMax/];
+            }
+
+            @Override
+            public Tactique getTactique() {
+                return Tactique.[modObs.tactique/];
+            }
+
+            @Override
+            public Character getRepresentationConsole() {
+                return 'O';
+            }
+
+            @Override
+            public ImageIcon getRepresentationGraphique(int turn) {
+                return repr_[modObs.name/]['[0]'/];
+            }
+        }
+[/template]
+
+[comment ---------------TERRAINS---------------/]
+
+[query public getTerrains(eltCom : OrderedSet(ElementCommun)) : OrderedSet(Terrain) =
+    eltCom->select(e | e.oclIsKindOf(Terrain))
+          ->collect( nt | nt.oclAsType(Terrain))
+          ->asOrderedSet()
+/]
+
+[template public convertCases(cs : OrderedSet(Case))]
+[for (c : Case | cs)]
+                [if (cs->indexOf(c)<>1)]else [/if]if (x == [c.x-1/] && y == [c.y-1/]) {
+                    nt = [c.natureTerrain.name/];
+                }
+[/for]
+[/template]
+
+[template public convertTerrain(terr : Terrain)]
+        Case['[][]'/] arrayCase_[terr.name/] = new Case['['/][terr.nbLignes/][']['/][terr.nbColonnes/][']'/];
+        for (int x = 0; x<[terr.nbLignes/];x++){
+            for (int y=0; y<[terr.nbColonnes/]; y++){
+                NatureTerrain nt = null;
+[terr.cases->convertCases()/]
+                arrayCase_[terr.name/]['[x][y]'/] = new Case(x, y, nt);
+            }
+        }
+        Terrain [terr.name/] = new Terrain("[terr.name/]", [terr.nbLignes/], [terr.nbColonnes/], arrayCase_[terr.name/]);
+
+[/template]
+
+[comment ---------------PARTIES---------------/]
+
+[template public convertParties(parties : OrderedSet(Partie))]
+[for (p : Partie | parties)]
+
+        List<VagueMobiles> vagues_[p.name/] = new ArrayList<>();
+
+[for (v : VagueMobiles | p.vagues)]
+[v.convertVague(p)/]
+        vagues_[p.name/].add([v.name/]);
+[/for]
+        List<Niveau> niveau_partie1 = new ArrayList<>();
+        niveau_partie1.add(new Niveau(1,0,2));
+        Partie partie1 = new Partie("partie1", terrain1, vagues_partie1, niveau_partie1, modeleObstacles);
+        parties.add(partie1);
+[/for]
+[/template]
+
+[comment ---------------VAGUES------------------/]
+
+[template public convertVague(v : VagueMobiles, p : Partie)]
+        List<Mobile> mobiles_[v.name/] = new ArrayList<>();
+[for (m : Mobile | v.mobiles)]
+        mobiles_[v.name/].add(new [m.modele.name/]( arrayCase_[p.terrain.name/]['['/][m.caseEntreeVague.x-1/][']['/][m.caseEntreeVague.y-1/][']'/], arrayCase_[p.terrain.name/]['['/][m.caseSortieVague.x-1/][']['/][m.caseSortieVague.y-1/][']'/], [m.ordreVague/]));
+[/for]
+        List<Obstacle> obstacles_[v.name/] = new ArrayList<>();
+[for (o : Obstacle | v.obstacles)]
+        obstacles_[v.name/].add(new [o.modele.name/](arrayCase_[p.terrain.name/]['['/][o.position.x-1/][']['/][o.position.y-1/][']'/]));
+[/for]
+        VagueMobiles [v.name/] = new VagueMobiles("[v.name/]", [v.energieAttribueeJoueur/], mobiles_[v.name/], obstacles_[v.name/]);
+
+[/template]
+
+
